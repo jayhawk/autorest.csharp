@@ -12,6 +12,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
 using AutoRest.Extensions;
+using Microsoft.CSharp;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.LoadBalanced

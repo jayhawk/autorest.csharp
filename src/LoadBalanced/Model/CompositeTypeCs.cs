@@ -107,11 +107,11 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             get
             {
                 var baseProperties = ((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
-                    Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
+                    Enumerable.Empty<InheritedPropertyInfo>()).ToArray();
 
                 var properties = PropertyTypeSelectionStrategy.FilterProperties(baseProperties.Select(b => b.Property).ToArray());
 
-                baseProperties = baseProperties.Where(b => properties.Contains(b.Property)).ReEnumerable();
+                baseProperties = baseProperties.Where(b => properties.Contains(b.Property)).ToArray();
 
                 var depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
                 return baseProperties.Concat(GetFilteredProperties().Select(p => new InheritedPropertyInfo(p, depth)));
