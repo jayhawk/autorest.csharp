@@ -17,6 +17,7 @@ services:
       ENV_VERSION: ${VERSION}
       ENV_NUGET_KEY: ${NUGET_KEY}
       ENV_SHOULD_PUSH_NUGET: ${SHOULD_UPLOAD_TO_NUGET} 
+      ENV_USE_DATETIMEOFFSET: ${USE_DATETIMEOFFSET}
       # To test on local
       #ENV_YML_FILE_URL: "https://github.agodadev.io/raw/IT-Platform/customer-api/7edb9cafd6482334558be1f523e67a4318d364c3/src/main/resources/openapi.yml?token=AAAAAYM5MMNJGIJKNLLRQH26TVPLY"
       #ENV_NAMESPACE: Agoda.CustomerApi.Client.V2

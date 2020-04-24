@@ -12,7 +12,11 @@ curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
 eolConverter "./input/swagger.yml"
 
-autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
+if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
+  autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset
+else
+  autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
+fi
 
 dotnet new classlib -n $NAMESPACE -o $OUTPUT_PATH
 cat >NuGet.config <<EOL
