@@ -13,9 +13,9 @@ eolConverter "./input/swagger.yaml"
 
 if [ "$ENV_USE_OPENAPI_V3" = "true" ]; then
   if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
-    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --debug
+    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --debug --version=3.0.6274
   else
-    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --debug
+    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --debug --version=3.0.6274
   fi
 else
   if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
