@@ -18,7 +18,6 @@ namespace @Settings.Namespace
     using System.Threading.Tasks;
     using Microsoft.Rest;
     using Agoda.Frameworks.LoadBalancing;
-    using Polly;
 @EmptyLine
 
     public partial class @Model.Name
@@ -93,7 +92,7 @@ namespace @Settings.Namespace
                         Microsoft.Rest.ServiceClientTracing.Error(invocationId, ex);
                     }
 
-                    if (ex is Polly.Timeout.TimeoutRejectedException) 
+                    if (ex is TaskCanceledException) 
                     {
                         throw new TimeoutException($"Request Timeout {source}", ex);
                     }
