@@ -1,12 +1,12 @@
 #!/bin/bash -xe
 
-OUTPUT_PATH=/app/output
+OUTPUT_PATH=/src/output
 NAMESPACE=${CLIENT_NAMESPACE}
-INPUT_PATH=./input/swagger.yaml
+INPUT_PATH=/src/input/swagger.yaml
 SWAGGER_FILE=${SPEC_FILE}
 
 if [ -z "$SPEC_FILE" ]; then
-  SPEC_FILE=./input/swagger.json
+  SPEC_FILE=/src/input/swagger.json
 fi
 
 mkdir -p input
@@ -19,7 +19,7 @@ else
 fi
 
 
-eolConverter "./input/swagger.yaml"
+eolConverter "/src/input/swagger.yaml"
 
 if [ "$ENV_USE_OPENAPI_V3" = "true" ]; then
   if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
