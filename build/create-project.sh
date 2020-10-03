@@ -5,8 +5,8 @@ NAMESPACE=${CLIENT_NAMESPACE}
 INPUT_PATH=/src/input/swagger.yaml
 SWAGGER_FILE=${SPEC_FILE}
 
-if [ -z "$SPEC_FILE" ]; then
-  SPEC_FILE=/src/input/swagger.json
+if [ -z "$SWAGGER_FILE" ]; then
+  SWAGGER_FILE=/src/input/swagger.json
 fi
 
 mkdir -p input
