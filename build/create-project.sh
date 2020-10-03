@@ -7,7 +7,12 @@ INPUT_PATH=./input/swagger.yaml
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
-curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
+if[[ $INPUT_PATH == http* ]]; then
+  curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
+else
+  INPUT_PATH=${ENV_YML_FILE_URL}
+fi
+
 
 eolConverter "./input/swagger.yaml"
 
