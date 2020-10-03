@@ -67,7 +67,10 @@ rm $OUTPUT_PATH/Class1.cs
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$VERSION
 
 if [ "$SHOULD_PUSH_NUGET" = "false" ]; then
-  echo "Nuget is not pushed because SHOULD_PUSH_NUGET is set to $SHOULD_PUSH_NUGET"
+  echo "Nuget is not pushed because SHOULD_PUSH_NUGET is set to $SHOULD_PUSH_NUGET , clean up will not run"
 else
   dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$VERSION.nupkg -k $NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
+  rm -rf output
+  rm -rf input
 fi
+
