@@ -38,8 +38,7 @@ cat >NuGet.config <<EOL
     <add key="disableSourceControlIntegration" value="true" />
   </solution>
   <packageSources>
-    <add key="Klondike" value="https://bk-lib-nuget.agodadev.io/api/odata" />
-    <add key="Agoda NuGet" value="http://repo.hkg.sdlc.agoda.local/artifactory/api/nuget/agoda-nuget" />
+    <add key="Klondike" value="https://hk-lib-nuget.agodadev.io/api/odata" />
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
   <packageSourceCredentials>
@@ -55,8 +54,8 @@ rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
 
-if [ "$ENV_SHOULD_PUSH_NUGET" = "true" ]; then
-  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
-else
+if [ "$ENV_SHOULD_PUSH_NUGET" = "false" ]; then
   echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
+else
+  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
 fi
