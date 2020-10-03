@@ -7,7 +7,7 @@ INPUT_PATH=./input/swagger.yaml
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
-if [[ $INPUT_PATH == http* ]]; then
+if [[ ${ENV_YML_FILE_URL} == http* ]]; then
   curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 else
   INPUT_PATH=${ENV_YML_FILE_URL}
