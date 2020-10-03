@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-OUTPUT_PATH=${ENV_OUTPUT_PATH}
+OUTPUT_PATH=/app/output
 NAMESPACE=${ENV_NAMESPACE}
 INPUT_PATH=./input/swagger.yaml
 
