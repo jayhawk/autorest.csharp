@@ -13,22 +13,24 @@ mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
 if [[ $SWAGGER_FILE == http* ]]; then
+echo "Im downloading the swagger spec from a remote Url $SWAGGER_FILE to local path $INPUT_PATH"
   curl -o $INPUT_PATH $SWAGGER_FILE
 else
   INPUT_PATH=$SWAGGER_FILE
+  echo "Im setting spec $INPUT_PATH to lcoal path $SWAGGER_FILE"
 fi
 
 
 eolConverter "/src/input/swagger.yaml"
 
-if [ "$ENV_USE_OPENAPI_V3" = "true" ]; then
-  if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
+if [ "$USE_OPENAPI_V3" = "true" ]; then
+  if [ "$USE_DATETIMEOFFSET" = "true" ]; then
     autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --debug --version=3.0.6274
   else
     autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --debug --version=3.0.6274
   fi
 else
-  if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
+  if [ "$USE_DATETIMEOFFSET" = "true" ]; then
     autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --debug
   else
     autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --debug
@@ -64,8 +66,8 @@ rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$VERSION
 
-if [ "$ENV_SHOULD_PUSH_NUGET" = "false" ]; then
-  echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
+if [ "$SHOULD_PUSH_NUGET" = "false" ]; then
+  echo "Nuget is not pushed because SHOULD_PUSH_NUGET is set to $SHOULD_PUSH_NUGET"
 else
   dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$VERSION.nupkg -k $NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
 fi
