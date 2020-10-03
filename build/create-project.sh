@@ -1,16 +1,21 @@
 #!/bin/bash -xe
 
 OUTPUT_PATH=/app/output
-NAMESPACE=${ENV_NAMESPACE}
+NAMESPACE=${CLIENT_NAMESPACE}
 INPUT_PATH=./input/swagger.yaml
+SWAGGER_FILE=${SPEC_FILE}
+
+if [ -z "$SPEC_FILE" ]; then
+  SPEC_FILE=./input/swagger.json
+fi
 
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
-if [[ ${ENV_YML_FILE_URL} == http* ]]; then
-  curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
+if [[ $SWAGGER_FILE == http* ]]; then
+  curl -o $INPUT_PATH $SWAGGER_FILE
 else
-  INPUT_PATH=${ENV_YML_FILE_URL}
+  INPUT_PATH=$SWAGGER_FILE
 fi
 
 
@@ -57,10 +62,10 @@ dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http -v 3.0.7
 
 rm $OUTPUT_PATH/Class1.cs
 
-dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
+dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$VERSION
 
 if [ "$ENV_SHOULD_PUSH_NUGET" = "false" ]; then
   echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
 else
-  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
+  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$VERSION.nupkg -k $NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
 fi
