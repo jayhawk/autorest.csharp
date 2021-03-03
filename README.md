@@ -3,7 +3,6 @@
 
 This is the autorest extension for agoda which uses the roundrobin client.
 The [AutoRest](https://github.com/Azure/autorest) tool generates client libraries for accessing RESTful web services.
-
 ## Usage
 
 you should either put your swagger in the path ./input/swagger.json OR pass teh option variable SPEC_FILE
@@ -31,3 +30,9 @@ reg-hk.agodadev.io/library/autorest-gen:latest
 | SHOULD_PUSH_NUGET  | Should push to nuget server after the package is built? | true |
 
 * Required
+
+#### Test on Local
+- Clone this repo
+- Modify docker-compose.yml as the detail inside
+- run docker-compose up --build
+- check the result at the location you set in the volume

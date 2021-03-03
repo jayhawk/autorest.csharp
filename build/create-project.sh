@@ -20,7 +20,6 @@ else
   echo "Im setting spec $INPUT_PATH to lcoal path $SWAGGER_FILE"
 fi
 
-
 eolConverter "/src/input/swagger.yaml"
 
 if [ "$USE_OPENAPI_V3" = "true" ]; then
