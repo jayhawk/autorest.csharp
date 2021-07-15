@@ -12,9 +12,10 @@ fi
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
+
 if [[ $SWAGGER_FILE == http* ]]; then
 echo "Im downloading the swagger spec from a remote Url $SWAGGER_FILE to local path $INPUT_PATH"
-  curl -o $INPUT_PATH $SWAGGER_FILE
+  curl --insecure -o $INPUT_PATH $SWAGGER_FILE
 else
   INPUT_PATH=$SWAGGER_FILE
   echo "Im setting spec $INPUT_PATH to lcoal path $SWAGGER_FILE"
