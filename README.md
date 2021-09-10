@@ -5,16 +5,16 @@ This is the autorest extension for agoda which uses the roundrobin client.
 The [AutoRest](https://github.com/Azure/autorest) tool generates client libraries for accessing RESTful web services.
 ## Usage
 
-you should either put your swagger in the path ./input/swagger.json OR pass the option variable SPEC_FILE
+you should either put your swagger in the path `./input/swagger.json` OR pass the option variable `SPEC_FILE`
 
-SPEC_FILE can be a Url or a path, if it is a Url it will downlaoded, if its  path it must be a path raltive to the working folder (e.g. ./input/anotherswagger.json) , or rooted in the /src mount (e.g. /src/input/anotherswagger.json)
+`SPEC_FILE` can be a Url or a path, if it is a Url it will downlaoded, if its  path it must be a path raltive to the working folder (e.g. `./input/anotherswagger.json`) , or rooted in the `/src` mount (e.g. `/src/input/anotherswagger.json`)
 
 ```bash
 docker run -v ${PWD}:/src -e NUGET_KEY=xxxxxxxxxxxx \
--e SPEC_FILE=http://hk-qabapi-2a03:8080/api-docs/swagger.yaml \
--e CLIENT_NAMESPACE=Agoda.BookingApi.Client.V2 \
+-e SPEC_FILE=http://path/to/your/swagger.yaml \
+-e CLIENT_NAMESPACE=Your.App.Namespace \
 -e VERSION=2.0.25 \
-reg-hk.agodadev.io/library/autorest-gen:latest
+your-org-repo/autorest-gen:latest
 ```
 
 ### Varibles
