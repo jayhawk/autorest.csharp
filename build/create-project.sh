@@ -9,6 +9,7 @@ if [ -z "$SWAGGER_FILE" ]; then
   SWAGGER_FILE=/src/input/swagger.json
 fi
 
+mkdir -p /src/input
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
@@ -18,7 +19,7 @@ echo "Im downloading the swagger spec from a remote Url $SWAGGER_FILE to local p
   curl --insecure -o $INPUT_PATH $SWAGGER_FILE
 else
   INPUT_PATH=$SWAGGER_FILE
-  echo "Im setting spec $INPUT_PATH to lcoal path $SWAGGER_FILE"
+  echo "Im setting spec $INPUT_PATH to local path $SWAGGER_FILE"
 fi
 
 eolConverter "/src/input/swagger.yaml"
